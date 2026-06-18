@@ -5,10 +5,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install Linux packages
+        run: |
+          sudo apt update
+          sudo apt install -y libtinfo6 libncurses6 openjdk-17-jdk
 
       - name: Build APK
         uses: digreatbrian/buildozer-action@v2
