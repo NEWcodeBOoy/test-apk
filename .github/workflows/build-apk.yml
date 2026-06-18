@@ -15,10 +15,14 @@ jobs:
           sudo apt update
           sudo apt install -y libtinfo6 libncurses6 openjdk-17-jdk
 
+      - name: Accept Android licenses
+        run: |
+          yes | ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Build APK
         uses: digreatbrian/buildozer-action@v2
         with:
-          buildozer-cmd: buildozer android debug
+          buildozer-cmd: yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
